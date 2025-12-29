@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Minecraft Orbital Glyphs</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <style>
+            body {
+                font-family: "Segoe UI", Roboto, Arial, sans-serif;
+                margin: 12px;
+                background: #0f1720;
+                color: #e6eef6;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .caption {
+                color: #9fb3cc;
+                margin-bottom: 12px;
+                font-size: 13px;
+            }
+            .chart-wrap {
+                display: flex;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            .legend {
+                font-size: 14px;
+                max-width: 300px;
+                line-height: 1.5;
+            }
+            .legend .title { 
+                font-weight: 600;
+                font-size: 16px;
+                margin-bottom: 6px;
+                color:#dff0ff
+            }
+            .tooltip {
+                position: absolute;
+                pointer-events: none;
+                background: rgba(6,10,14,0.95);
+                color: #e6eef6;
+                padding: 8px 10px;
+                border-radius: 6px;
+                font-size: 13px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+                border: 1px solid rgba(255,255,255,0.03);
+                display: none;
+                max-width: 320px;
+            }
+            .detail {
+                background: rgba(255,255,255,0.02);
+                padding: 8px;
+                border-radius: 6px;
+                width: 300px;
+                font-size: 13px;
+                color: #dbeeff;
+            }
+            .detail h3 {
+                margin: 0 0 6px 0;
+                color: #fff;
+                font-size: 16px
+            }
+            .pin {
+                margin-top: 8px;
+                padding: 6px 8px;
+                display: inline-block;
+                background: #123244;
+                border-radius: 4px;
+                cursor: pointer;
+                color: #dbeeff;
+                font-size: 14px;
+            }
+            .ring-label {
+                fill: #fff;
+                font-size: 12px;
+                text-anchor: middle;
+                opacity: 0.9;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Minecraft Orbital Glyphs - museum exhibit</h1>
+        <div class="caption">Each glyph is a mob. Glyph size = healthPoints. Radial arc = maxDamage. Color = behaviorTypes. Ring = minecraft era. Hover or click a glyph for more info.</div>
+
+        <div class="chart-wrap">
+            <div class="legend">
+                <div class="title">Legend</div>
+                <div><strong>Color:</strong> behaviorTypes (Hostile = red, Passive = green, Conditional = blue)</div>
+                <div><strong>Size:</strong> Circle radius ==> healthPoints</div>
+                <div><strong>Arc:</strong> Arc length ==> maxDamage (0 to max)</div>
+                <div><strong>Interaction:</strong> Hover tooltip, click pins detail on the right.</div>
+            </div>
+
+            <div id="svg-container"></div>
+
+            <div class="detail" id="detail-pane">
+                <h3>Click a mob to pin details</h3>
+                <div id="detail-content">No mob selected.</div>
+            </div>
+        </div>
+        
+        <div class="tooltip" id="tooltip"></div>
+        <script src="script.js"></script>
+    </body>
+</html>
